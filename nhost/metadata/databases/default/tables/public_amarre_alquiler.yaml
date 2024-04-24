@@ -1,0 +1,71 @@
+table:
+  name: amarre_alquiler
+  schema: public
+object_relationships:
+  - name: amarre
+    using:
+      foreign_key_constraint_on: id_amarre
+  - name: user
+    using:
+      foreign_key_constraint_on: id_user
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      set:
+        id_user: x-hasura-User-Id
+      columns:
+        - activo
+        - createdAt
+        - descripcion
+        - eslora
+        - fechaFin
+        - fechaIni
+        - id_amarre
+        - manga
+        - precio
+select_permissions:
+  - role: public
+    permission:
+      columns:
+        - activo
+        - fechaFin
+        - fechaIni
+        - eslora
+        - manga
+        - precio
+        - descripcion
+        - createdAt
+        - id
+        - id_amarre
+        - id_user
+      filter: {}
+  - role: user
+    permission:
+      columns:
+        - id
+        - createdAt
+        - id_amarre
+        - id_user
+        - precio
+        - descripcion
+        - eslora
+        - manga
+        - fechaIni
+        - fechaFin
+        - activo
+      filter: {}
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - activo
+        - createdAt
+        - descripcion
+        - eslora
+        - fechaFin
+        - fechaIni
+        - manga
+        - precio
+      filter: {}
+      check: null

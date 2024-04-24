@@ -1,0 +1,66 @@
+table:
+  name: amarre_ventas
+  schema: public
+object_relationships:
+  - name: amarre
+    using:
+      foreign_key_constraint_on: id_amarre
+  - name: user
+    using:
+      foreign_key_constraint_on: id_user
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      set:
+        id_user: x-hasura-User-Id
+      columns:
+        - descripcion
+        - eslora
+        - fecha
+        - id_amarre
+        - manga
+        - precio
+select_permissions:
+  - role: public
+    permission:
+      columns:
+        - activo
+        - fecha
+        - eslora
+        - manga
+        - precio
+        - descripcion
+        - createdAt
+        - id
+        - id_amarre
+        - id_user
+      filter: {}
+  - role: user
+    permission:
+      columns:
+        - activo
+        - descripcion
+        - eslora
+        - fecha
+        - id
+        - id_amarre
+        - id_user
+        - manga
+        - precio
+      filter: {}
+      allow_aggregations: true
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - activo
+        - descripcion
+        - eslora
+        - fecha
+        - manga
+        - precio
+      filter:
+        id_user:
+          _eq: X-Hasura-User-Id
+      check: null

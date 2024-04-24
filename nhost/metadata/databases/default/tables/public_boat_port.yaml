@@ -1,0 +1,10 @@
+table:
+  name: boat_port
+  schema: public
+object_relationships:
+  - name: boat
+    using:
+      foreign_key_constraint_on: id_boat
+  - name: port
+    using:
+      foreign_key_constraint_on: id_port

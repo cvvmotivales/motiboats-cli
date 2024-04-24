@@ -1,0 +1,45 @@
+table:
+  name: amarre_logs
+  schema: public
+object_relationships:
+  - name: amarre
+    using:
+      foreign_key_constraint_on: id_amarre
+  - name: user
+    using:
+      foreign_key_constraint_on: id_user
+  - name: userByIdUserReciever
+    using:
+      foreign_key_constraint_on: id_user_reciever
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      set:
+        id_user: x-hasura-User-Id
+      columns:
+        - createdAt
+        - fecha_fin
+        - fecha_inicio
+        - id_amarre
+        - id_amarre_destino
+        - id_user
+        - id_user_reciever
+        - precio
+        - tipo
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - createdAt
+        - fecha_fin
+        - fecha_inicio
+        - id
+        - id_amarre
+        - id_amarre_destino
+        - id_user
+        - id_user_reciever
+        - precio
+        - tipo
+      filter: {}
+      allow_aggregations: true

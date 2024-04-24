@@ -1,0 +1,49 @@
+table:
+  name: puerto_imagen
+  schema: public
+object_relationships:
+  - name: file
+    using:
+      foreign_key_constraint_on: id_imagen
+  - name: port
+    using:
+      foreign_key_constraint_on: id_puerto
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - id
+        - id_imagen
+        - id_puerto
+        - pos
+select_permissions:
+  - role: public
+    permission:
+      columns:
+        - id
+        - id_imagen
+        - id_puerto
+      filter: {}
+  - role: user
+    permission:
+      columns:
+        - id
+        - id_imagen
+        - id_puerto
+        - pos
+      filter: {}
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - id
+        - id_imagen
+        - id_puerto
+        - pos
+      filter: {}
+      check: null
+delete_permissions:
+  - role: user
+    permission:
+      filter: {}

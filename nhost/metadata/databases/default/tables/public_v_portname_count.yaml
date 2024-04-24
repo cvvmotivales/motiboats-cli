@@ -1,0 +1,13 @@
+table:
+  name: v_portname_count
+  schema: public
+object_relationships:
+  - name: v1_v2portname
+    using:
+      manual_configuration:
+        column_mapping:
+          portnamelimpio: portnamelimpio
+        insertion_order: null
+        remote_table:
+          name: v_amarre_ventas_2
+          schema: public

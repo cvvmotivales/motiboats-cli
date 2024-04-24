@@ -1,0 +1,31 @@
+table:
+  name: bookings_logs
+  schema: public
+object_relationships:
+  - name: booking
+    using:
+      foreign_key_constraint_on: id_booking
+  - name: status
+    using:
+      foreign_key_constraint_on: id_status
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        booking:
+          id_user:
+            _eq: X-Hasura-User-Id
+      columns:
+        - id_booking
+        - id_status
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - id_booking
+        - id_status
+        - id
+      filter:
+        booking:
+          id_user:
+            _eq: X-Hasura-User-Id

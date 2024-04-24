@@ -1,0 +1,92 @@
+table:
+  name: boats
+  schema: public
+array_relationships:
+  - name: boat_ports
+    using:
+      foreign_key_constraint_on:
+        column: id_boat
+        table:
+          name: boat_port
+          schema: public
+  - name: bookings
+    using:
+      foreign_key_constraint_on:
+        column: id_boat
+        table:
+          name: bookings
+          schema: public
+  - name: change_boat_owner_logs
+    using:
+      foreign_key_constraint_on:
+        column: id_boat
+        table:
+          name: change_boat_owner_log
+          schema: public
+  - name: notifications
+    using:
+      foreign_key_constraint_on:
+        column: id_boat
+        table:
+          name: notifications
+          schema: public
+  - name: user_boats
+    using:
+      foreign_key_constraint_on:
+        column: id_boat
+        table:
+          name: user_boat
+          schema: public
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - bathrooms
+        - boatName
+        - cabins
+        - description
+        - fuel
+        - id
+        - location
+        - passengers
+        - price
+        - size
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - bathrooms
+        - cabins
+        - passengers
+        - price
+        - size
+        - boatName
+        - description
+        - fuel
+        - location
+        - id
+      filter:
+        user_boats:
+          id_user:
+            _eq: X-Hasura-User-Id
+      allow_aggregations: true
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - bathrooms
+        - boatName
+        - cabins
+        - description
+        - fuel
+        - location
+        - passengers
+        - price
+        - size
+      filter: {}
+      check: {}
+delete_permissions:
+  - role: user
+    permission:
+      filter: {}

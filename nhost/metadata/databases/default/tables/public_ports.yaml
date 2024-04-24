@@ -1,0 +1,96 @@
+table:
+  name: ports
+  schema: public
+object_relationships:
+  - name: tipos_puerto
+    using:
+      foreign_key_constraint_on: id_tipo
+array_relationships:
+  - name: amarres
+    using:
+      foreign_key_constraint_on:
+        column: id_puerto
+        table:
+          name: amarre
+          schema: public
+  - name: amarres_puertos
+    using:
+      foreign_key_constraint_on:
+        column: id_puerto
+        table:
+          name: amarres_puerto
+          schema: public
+  - name: boat_ports
+    using:
+      foreign_key_constraint_on:
+        column: id_port
+        table:
+          name: boat_port
+          schema: public
+  - name: puerto_imagens
+    using:
+      foreign_key_constraint_on:
+        column: id_puerto
+        table:
+          name: puerto_imagen
+          schema: public
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - id
+        - country
+        - portName
+        - region
+        - zone
+        - createdAt
+        - posLat
+        - posLong
+        - id_tipo
+        - expiracionConcesion
+select_permissions:
+  - role: public
+    permission:
+      columns:
+        - country
+        - createdAt
+        - id
+        - id_tipo
+        - portName
+        - posLat
+        - posLong
+        - region
+        - zone
+      filter: {}
+  - role: user
+    permission:
+      columns:
+        - country
+        - createdAt
+        - expiracionConcesion
+        - id
+        - id_tipo
+        - portName
+        - posLat
+        - posLong
+        - region
+        - zone
+      filter: {}
+      allow_aggregations: true
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - posLat
+        - posLong
+        - country
+        - expiracionConcesion
+        - portName
+        - region
+        - zone
+        - createdAt
+        - id
+        - id_tipo
+      filter: {}
+      check: null

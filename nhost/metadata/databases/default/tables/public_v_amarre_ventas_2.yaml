@@ -1,0 +1,49 @@
+table:
+  name: v_amarre_ventas_2
+  schema: public
+object_relationships:
+  - name: vista_amarres_venta_amarre
+    using:
+      manual_configuration:
+        column_mapping:
+          id_amarre: id
+        insertion_order: null
+        remote_table:
+          name: amarre
+          schema: public
+  - name: vista_amarres_venta_amarres_port
+    using:
+      manual_configuration:
+        column_mapping:
+          id_amarre_puerto: id
+        insertion_order: null
+        remote_table:
+          name: amarres_puerto
+          schema: public
+  - name: vista_amarres_venta_ports
+    using:
+      manual_configuration:
+        column_mapping:
+          id_puerto: id
+        insertion_order: null
+        remote_table:
+          name: ports
+          schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - activo
+        - fecha
+        - eslora
+        - manga
+        - precio
+        - color
+        - descripcion
+        - mote
+        - portnamelimpio
+        - id
+        - id_amarre
+        - id_amarre_puerto
+        - id_puerto
+      filter: {}

@@ -1,0 +1,10 @@
+table:
+  name: v_amarre_ventas_totales_colores
+  schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - color
+        - count
+      filter: {}

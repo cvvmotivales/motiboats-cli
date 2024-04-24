@@ -1,0 +1,67 @@
+table:
+  name: amarres_puerto
+  schema: public
+object_relationships:
+  - name: port
+    using:
+      foreign_key_constraint_on: id_puerto
+array_relationships:
+  - name: amarres
+    using:
+      foreign_key_constraint_on:
+        column: id_amarre_puerto
+        table:
+          name: amarre
+          schema: public
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - calado
+        - eslora
+        - manga
+        - numAmarre
+        - situacion
+        - id
+        - id_puerto
+select_permissions:
+  - role: public
+    permission:
+      columns:
+        - calado
+        - eslora
+        - manga
+        - numAmarre
+        - situacion
+        - id
+        - id_puerto
+      filter: {}
+  - role: user
+    permission:
+      columns:
+        - id
+        - numAmarre
+        - id_puerto
+        - eslora
+        - manga
+        - calado
+        - situacion
+      filter: {}
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - calado
+        - eslora
+        - manga
+        - numAmarre
+        - situacion
+        - id
+        - id_puerto
+      filter: {}
+      check: null
+delete_permissions:
+  - role: user
+    permission:
+      filter: {}

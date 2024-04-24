@@ -1,0 +1,11 @@
+table:
+  name: v_portname_count_and_color
+  schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - color_count
+        - color
+        - portnamelimpio
+      filter: {}

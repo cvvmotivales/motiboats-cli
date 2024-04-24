@@ -1,0 +1,42 @@
+table:
+  name: amarre_imagen
+  schema: public
+object_relationships:
+  - name: amarre
+    using:
+      foreign_key_constraint_on: id_amarre
+  - name: file
+    using:
+      foreign_key_constraint_on: id_imagen
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - id
+        - id_amarre
+        - id_imagen
+        - pos
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - id
+        - id_amarre
+        - id_imagen
+        - pos
+      filter: {}
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - id
+        - id_amarre
+        - id_imagen
+        - pos
+      filter: {}
+      check: null
+delete_permissions:
+  - role: user
+    permission:
+      filter: {}

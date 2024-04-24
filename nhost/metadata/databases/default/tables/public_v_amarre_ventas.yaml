@@ -1,0 +1,43 @@
+table:
+  name: v_amarre_ventas
+  schema: public
+object_relationships:
+  - name: v_amarre_ventas_amarres_amarre
+    using:
+      manual_configuration:
+        column_mapping:
+          id_amarre: id
+        insertion_order: null
+        remote_table:
+          name: amarre
+          schema: public
+  - name: v_amarre_ventas_amarres_port
+    using:
+      manual_configuration:
+        column_mapping:
+          id_amarre_puerto: id
+        insertion_order: null
+        remote_table:
+          name: amarres_puerto
+          schema: public
+  - name: v_amarre_ventas_ports
+    using:
+      manual_configuration:
+        column_mapping:
+          id_puerto: id
+        insertion_order: null
+        remote_table:
+          name: ports
+          schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - color
+        - portnamelimpio
+        - id
+        - id_amarre
+        - id_amarre_puerto
+        - id_puerto
+      filter: {}
+      allow_aggregations: true

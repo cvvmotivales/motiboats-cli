@@ -1,0 +1,52 @@
+table:
+  name: notifications
+  schema: public
+object_relationships:
+  - name: boat
+    using:
+      foreign_key_constraint_on: id_boat
+  - name: user
+    using:
+      foreign_key_constraint_on: id_user_receiver
+  - name: userByIdUserSender
+    using:
+      foreign_key_constraint_on: id_user_sender
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      set:
+        id_user_sender: x-hasura-User-Id
+      columns:
+        - checked
+        - description
+        - id
+        - id_boat
+        - id_user_receiver
+        - title
+        - type
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - checked
+        - description
+        - id
+        - id_boat
+        - id_user_receiver
+        - id_user_sender
+        - title
+        - type
+      filter:
+        id_user_receiver:
+          _eq: X-Hasura-User-Id
+      allow_aggregations: true
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - checked
+      filter:
+        id_user_receiver:
+          _eq: X-Hasura-User-Id
+      check: null

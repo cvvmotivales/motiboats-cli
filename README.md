@@ -1,1 +1,0 @@
-# motiboats-cli

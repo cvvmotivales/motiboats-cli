@@ -1,0 +1,107 @@
+table:
+  name: amarre
+  schema: public
+object_relationships:
+  - name: amarres_puerto
+    using:
+      foreign_key_constraint_on: id_amarre_puerto
+  - name: file
+    using:
+      foreign_key_constraint_on: id_imagen
+  - name: port
+    using:
+      foreign_key_constraint_on: id_puerto
+  - name: user
+    using:
+      foreign_key_constraint_on: id_user
+array_relationships:
+  - name: amarre_alquilers
+    using:
+      foreign_key_constraint_on:
+        column: id_amarre
+        table:
+          name: amarre_alquiler
+          schema: public
+  - name: amarre_imagens
+    using:
+      foreign_key_constraint_on:
+        column: id_amarre
+        table:
+          name: amarre_imagen
+          schema: public
+  - name: amarre_logs
+    using:
+      foreign_key_constraint_on:
+        column: id_amarre
+        table:
+          name: amarre_logs
+          schema: public
+  - name: amarre_ventas
+    using:
+      foreign_key_constraint_on:
+        column: id_amarre
+        table:
+          name: amarre_ventas
+          schema: public
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      set:
+        id_user: x-hasura-User-Id
+      columns:
+        - eslora
+        - id_amarre_puerto
+        - id_imagen
+        - id_puerto
+        - manga
+        - mote
+        - numAmarre
+        - portName
+select_permissions:
+  - role: public
+    permission:
+      columns:
+        - createdAt
+        - eslora
+        - id
+        - id_amarre_puerto
+        - id_imagen
+        - id_puerto
+        - id_user
+        - manga
+        - mote
+        - numAmarre
+        - portName
+      filter: {}
+  - role: user
+    permission:
+      columns:
+        - createdAt
+        - eslora
+        - id
+        - id_amarre_puerto
+        - id_imagen
+        - id_puerto
+        - id_user
+        - manga
+        - mote
+        - numAmarre
+        - portName
+      filter: {}
+      allow_aggregations: true
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - eslora
+        - id_amarre_puerto
+        - id_imagen
+        - manga
+        - mote
+        - numAmarre
+        - portName
+      filter:
+        id_user:
+          _eq: X-Hasura-User-Id
+      check: null

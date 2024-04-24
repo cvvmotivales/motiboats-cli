@@ -1,0 +1,72 @@
+table:
+  name: bookings
+  schema: public
+object_relationships:
+  - name: boat
+    using:
+      foreign_key_constraint_on: id_boat
+  - name: client
+    using:
+      foreign_key_constraint_on: id_client
+  - name: user
+    using:
+      foreign_key_constraint_on: id_user
+array_relationships:
+  - name: bookings_logs
+    using:
+      foreign_key_constraint_on:
+        column: id_booking
+        table:
+          name: bookings_logs
+          schema: public
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      set:
+        id_user: x-hasura-User-Id
+      columns:
+        - comment
+        - date
+        - id_boat
+        - id_client
+        - id_user
+        - price
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - comment
+        - createdAt
+        - date
+        - id
+        - id_boat
+        - id_client
+        - id_user
+        - price
+      filter:
+        id_user:
+          _eq: X-Hasura-User-Id
+      allow_aggregations: true
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - comment
+        - date
+        - id_boat
+        - id_client
+        - id_user
+        - price
+      filter:
+        id_user:
+          _eq: X-Hasura-User-Id
+      check:
+        id_user:
+          _eq: X-Hasura-User-Id
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        id_user:
+          _eq: X-Hasura-User-Id

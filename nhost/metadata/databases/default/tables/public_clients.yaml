@@ -1,0 +1,58 @@
+table:
+  name: clients
+  schema: public
+object_relationships:
+  - name: user
+    using:
+      foreign_key_constraint_on: id_user
+array_relationships:
+  - name: bookings
+    using:
+      foreign_key_constraint_on:
+        column: id_client
+        table:
+          name: bookings
+          schema: public
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      set:
+        id_user: x-hasura-User-Id
+      columns:
+        - direction
+        - email
+        - lastname
+        - name
+        - tel
+        - id
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - direction
+        - email
+        - id
+        - lastname
+        - name
+        - tel
+      filter:
+        id_user:
+          _eq: X-Hasura-User-Id
+      allow_aggregations: true
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - direction
+        - email
+        - lastname
+        - name
+        - tel
+        - id
+      filter: {}
+      check: null
+delete_permissions:
+  - role: user
+    permission:
+      filter: {}
